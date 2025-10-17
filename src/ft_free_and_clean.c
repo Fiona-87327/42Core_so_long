@@ -56,11 +56,7 @@ void	cleanup_game(t_game *game)
 	if (game->map)
 		free_map(game->map);
 	if (game->mlx)
-	{
 		mlx_terminate(game->mlx);
-		// free(game->mlx);
-		game->mlx = NULL;
-	}
 }
 
 void	error_exit(const char *msg)

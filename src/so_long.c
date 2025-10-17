@@ -12,23 +12,6 @@
 
 #include "so_long.h"
 
-// int	validate_file_extension(const char *filename)
-// {
-// 	const char	*extension;
-// 	int			ext_len;
-// 	int			filename_len;
-
-// 	extension = ".ber";
-// 	filename_len = ft_strlen(filename);
-// 	ext_len = ft_strlen(extension);
-// 	if (filename_len < ext_len)
-// 	{
-// 		ft_printf("Error\nInvalid file extension! Use .ber\n");
-// 		return (1);
-// 	}
-// 	return (0);
-// }
-
 int	main(int argc, char **argv)
 {
 	t_game	*game;
@@ -38,8 +21,6 @@ int	main(int argc, char **argv)
 		ft_printf("Error\nUsage: ./so_long map_file.ber\n");
 		return (0);
 	}
-	// if (validate_file_extension(argv[1]))
-	// 	return (1);
 	game = malloc(sizeof(t_game));
 	if (!game)
 		return (1);

@@ -14,9 +14,9 @@
 
 int	check_valid_chars(t_map *map)
 {
-	char	c;
 	int		y;
 	int		x;
+	char	c;
 
 	y = 0;
 	while (y < map->rows)
@@ -25,12 +25,11 @@ int	check_valid_chars(t_map *map)
 		while (x < map->cols)
 		{
 			c = map->grid[y][x];
-			if (c == '\n' || c == '\t' || c == '\r')
+			if (c != '0' && c != '1' && c != 'P' && c != 'E' && c != 'C')
 			{
-				ft_printf("Error\nMap contains invalid character!\n");
+				ft_printf("Error\nMap contains invalid character '%c'!\n", c);
 				free_map(map);
 				exit(EXIT_FAILURE);
-				return (0);
 			}
 			x++;
 		}

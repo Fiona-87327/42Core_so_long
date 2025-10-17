@@ -1,26 +1,27 @@
-NAME = so_long
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
+NAME        = so_long
+CC          = cc
+CFLAGS      = -Wall -Wextra -Werror
 
-MLX42_DIR = MLX42
-MLX42_LIB = $(MLX42_DIR)/build/libmlx42.a
-MLX42_FLAGS = -ldl -lglfw -pthread -lm
+INCLUDE_DIR = include
+SRC_DIR     = src
+LIBFT_DIR   = libft
+MLX42_DIR   = MLX42
 
-LIBFT_DIR = libft
-LIBFT_LIB = $(LIBFT_DIR)/libft.a
+LIBFT_LIB   = $(LIBFT_DIR)/libft.a
+MLX42_LIB   = $(MLX42_DIR)/build/libmlx42.a
+INCLUDES    = -I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(MLX42_DIR)/include
+
+SRCS = $(SRC_DIR)/so_long.c \
+        $(SRC_DIR)/ft_render_game.c \
+        $(SRC_DIR)/ft_map.c \
+        $(SRC_DIR)/ft_key_hand.c \
+        $(SRC_DIR)/ft_game_init.c \
+        $(SRC_DIR)/ft_free_and_clean.c \
+        $(SRC_DIR)/ft_check_path.c \
+        $(SRC_DIR)/ft_check_map.c
+
 OBJS = $(SRCS:.c=.o)
-
-INCLUDES = -I./include -I$(MLX42_DIR)/include -I$(LIBFT_DIR)
-
-SRCS_DIR = src
-SRCS = $(SRCS_DIR)/so_long.c \
-	   $(SRCS_DIR)/ft_render_game.c \
-	   $(SRCS_DIR)/ft_map.c \
-	   $(SRCS_DIR)/ft_key_hand.c \
-	   $(SRCS_DIR)/ft_game_init.c \
-	   $(SRCS_DIR)/ft_free_and_clean.c \
-	   $(SRCS_DIR)/ft_check_path.c \
-	   $(SRCS_DIR)/ft_check_map.c \
+MLX42_FLAGS = -ldl -lglfw -pthread -lm
 
 all: deps $(NAME)
 
@@ -29,28 +30,28 @@ deps:
 	@which pkg-config > /dev/null || (echo "Installing pkg-config..." && sudo apt-get install -y pkg-config)
 	@pkg-config --exists glfw3 || (echo "Installing GLFW3..." && sudo apt-get install -y libglfw3-dev)
 
-$(MLX42_LIB): deps
-	@echo "Building MLX42..."
-	@cmake $(MLX42_DIR) -B $(MLX42_DIR)/build && make -C $(MLX42_DIR)/build -j4
-
 $(LIBFT_LIB):
-	$(MAKE) -C $(LIBFT_DIR)
+	@$(MAKE) -C $(LIBFT_DIR)
+
+$(MLX42_LIB): deps
+	@cmake $(MLX42_DIR) -B $(MLX42_DIR)/build -DDEBUG=1 >/dev/null
+	@$(MAKE) -C $(MLX42_DIR)/build -j$(nproc)
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-$(NAME): $(MLX42_LIB) $(LIBFT_LIB) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(MLX42_LIB) $(LIBFT_LIB) $(MLX42_FLAGS) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT_LIB) $(MLX42_LIB)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX42_LIB) $(MLX42_FLAGS) -o $(NAME)
 
 clean:
-	rm -f $(OBJS)
-	$(MAKE) -C $(LIBFT_DIR) clean
+	@rm -f $(OBJS)
+	@$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
-	rm -f $(NAME)
-	$(MAKE) -C $(LIBFT_DIR) fclean
-	rm -rf $(MLX42_DIR)/build
+	@rm -f $(NAME)
+	@$(MAKE) -C $(LIBFT_DIR) fclean
+	@rm -rf $(MLX42_DIR)/build
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re deps

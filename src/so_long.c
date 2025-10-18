@@ -6,7 +6,7 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 13:27:44 by jiyawang          #+#    #+#             */
-/*   Updated: 2025/09/26 14:57:50 by jiyawang         ###   ########.fr       */
+/*   Updated: 2025/10/18 10:03:53 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	if (!init_game(game, argv[1]))
 	{
 		cleanup_game(game);
-		ft_printf("Error\nFailed to initialize game!\n");
+		ft_printf("Error: Failed to initialize game!\n");
 		free(game);
 		return (1);
 	}

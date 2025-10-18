@@ -6,7 +6,7 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 13:28:25 by jiyawang          #+#    #+#             */
-/*   Updated: 2025/09/26 21:14:13 by jiyawang         ###   ########.fr       */
+/*   Updated: 2025/10/18 10:05:30 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,6 @@ static void	ft_free_visited(int **visited, int rows)
 		i++;
 	}
 	free(visited);
-}
-
-void	dfs(t_map *map, int x, int y, int **visited)
-{
-	if (x < 0 || x >= map->cols || y < 0 || y >= map->rows)
-		return ;
-	if (map->grid[y][x] == WALL || visited[y][x])
-		return ;
-	visited[y][x] = 1;
-	dfs(map, x + 1, y, visited);
-	dfs(map, x - 1, y, visited);
-	dfs(map, x, y + 1, visited);
-	dfs(map, x, y - 1, visited);
 }
 
 static int	is_path_valid(t_map *map, int **visited)
@@ -83,6 +70,19 @@ static void	find_player_position(t_map *map, int *player_x, int *player_y)
 		}
 		y++;
 	}
+}
+
+void	dfs(t_map *map, int x, int y, int **visited)
+{
+	if (x < 0 || x >= map->cols || y < 0 || y >= map->rows)
+		return ;
+	if (map->grid[y][x] == WALL || visited[y][x])
+		return ;
+	visited[y][x] = 1;
+	dfs(map, x + 1, y, visited);
+	dfs(map, x - 1, y, visited);
+	dfs(map, x, y + 1, visited);
+	dfs(map, x, y - 1, visited);
 }
 
 int	check_path(t_map *map)

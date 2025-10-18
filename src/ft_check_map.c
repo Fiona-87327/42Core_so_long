@@ -6,7 +6,7 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 09:48:43 by jiyawang          #+#    #+#             */
-/*   Updated: 2025/09/26 13:42:14 by jiyawang         ###   ########.fr       */
+/*   Updated: 2025/10/18 09:58:48 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ int	validate_map(t_map *map)
 	if (!check_map_if_rectangle(map))
 		return (0);
 	if (!check_element_counts(map))
+		return (0);
+	if (!check_path(map))
 		return (0);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/21 13:55:19 by jiyawang          #+#    #+#             */
-/*   Updated: 2025/09/26 21:04:00 by jiyawang         ###   ########.fr       */
+/*   Updated: 2025/10/18 11:14:03 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int				move_player(t_game *game, int new_x, int new_y);
 int				main(int argc, char **argv);
 char			*read_file_content(const char *filename);
 void			count_map_elements(t_map *map);
-void			dfs(t_map *map, int x, int y, int **visited);
 int				check_path(t_map *map);
 int				check_valid_chars(t_map *map);
 int				validate_file_extension(const char *filename);

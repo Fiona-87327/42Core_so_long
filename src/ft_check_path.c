@@ -6,7 +6,7 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 13:28:25 by jiyawang          #+#    #+#             */
-/*   Updated: 2025/10/18 10:16:12 by jiyawang         ###   ########.fr       */
+/*   Updated: 2025/10/18 11:13:52 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	find_player_position(t_map *map, int *player_x, int *player_y)
 	}
 }
 
-void	dfs(t_map *map, int x, int y, int **visited)
+static void	dfs(t_map *map, int x, int y, int **visited)
 {
 	if (x < 0 || x >= map->cols || y < 0 || y >= map->rows)
 		return ;

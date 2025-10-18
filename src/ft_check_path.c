@@ -6,7 +6,7 @@
 /*   By: jiyawang <jiyawang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 13:28:25 by jiyawang          #+#    #+#             */
-/*   Updated: 2025/10/18 10:05:30 by jiyawang         ###   ########.fr       */
+/*   Updated: 2025/10/18 10:16:12 by jiyawang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	is_path_valid(t_map *map, int **visited)
 			if ((map->grid[y][x] == COLLECTIBLE || map->grid[y][x] == EXIT)
 				&& !visited[y][x])
 			{
-				ft_printf("Error: There is no path.\n");
+				error_exit("There is no path.");
 				return (0);
 			}
 			x++;

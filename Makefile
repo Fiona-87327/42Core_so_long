@@ -35,9 +35,15 @@ endif
 all: deps $(NAME)
 
 deps:
+ifeq ($(UNAME), Linux)
 	@which cmake > /dev/null || (echo "Installing cmake..." && sudo apt-get update && sudo apt-get install -y cmake)
 	@which pkg-config > /dev/null || (echo "Installing pkg-config..." && sudo apt-get install -y pkg-config)
 	@pkg-config --exists glfw3 || (echo "Installing GLFW3..." && sudo apt-get install -y libglfw3-dev)
+else ifeq ($(UNAME), Darwin)
+	@which brew > /dev/null || (echo "Homebrew not found. Please install it first: https://brew.sh" && exit 1)
+	@brew list cmake >/dev/null 2>&1 || (echo "Installing cmake..." && brew install cmake)
+	@brew list glfw >/dev/null 2>&1 || (echo "Installing glfw..." && brew install glfw)
+endif
 
 $(LIBFT_LIB):
 	@$(MAKE) -C $(LIBFT_DIR)
@@ -50,7 +56,7 @@ $(MLX42_LIB): deps
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(NAME): $(OBJS) $(LIBFT_LIB) $(MLX42_LIB)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX42_LIB) $(MLX42_FLAGS) -o $(NAME))
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX42_LIB) $(MLX42_FLAGS) -o $(NAME)
 
 clean:
 	@rm -f $(OBJS)

@@ -21,7 +21,16 @@ SRCS = $(SRC_DIR)/so_long.c \
         $(SRC_DIR)/ft_check_map.c
 
 OBJS = $(SRCS:.c=.o)
-MLX42_FLAGS = -ldl -lglfw -pthread -lm
+
+UNAME := $(shell uname)
+
+ifeq ($(UNAME), Linux)
+    MLX42_FLAGS = -ldl -lglfw -pthread -lm
+endif
+
+ifeq ($(UNAME), Darwin)
+    MLX42_FLAGS = -lglfw -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
+endif
 
 all: deps $(NAME)
 
@@ -41,7 +50,7 @@ $(MLX42_LIB): deps
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(NAME): $(OBJS) $(LIBFT_LIB) $(MLX42_LIB)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX42_LIB) $(MLX42_FLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX42_LIB) $(MLX42_FLAGS) -o $(NAME))
 
 clean:
 	@rm -f $(OBJS)

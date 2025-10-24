@@ -72,7 +72,7 @@ int	init_game(t_game *game, const char *map_file)
 	if (!game->map || !validate_map(game->map))
 		return (0);
 	game->mlx = mlx_init(game->map->cols * TILE_SIZE, game->map->rows
-			* TILE_SIZE, "so_long", false);
+			* TILE_SIZE, "so_long", true);
 	if (!game->mlx || !load_textures(game))
 	{
 		cleanup_game(game);

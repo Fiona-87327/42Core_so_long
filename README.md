@@ -1,7 +1,68 @@
 # so_long
-so_long is a small 2D puzzle/game project: control a player on a character map to collect all collectibles and reach the exit. The program (`so_long`) must validate the map, render it, and allow the player to move using keyboard controls.
 
-Common dependencies:
-- libft — your custom C utility library
-- MLX42 — or another MiniLibX-compatible graphics library
-- System libraries (e.g. GLFW/OpenGL). Exact requirements vary by platform and must be installed separately.
+Small 2D game project for 42 (Core Curriculum). The player must collect all collectibles and then reach the exit.
+
+## Requirements
+
+- Language: C
+- Graphics: MiniLibX
+- Build: `make`
+- (Optional) Uses `libft` (if your project does)
+
+## Build
+
+```bash
+make
+```
+
+(Optional, only if available)
+```bash
+make clean
+make fclean
+make re
+make bonus
+```
+
+## Usage
+
+```bash
+./so_long <map.ber>
+```
+
+Example:
+```bash
+./so_long maps/map.ber
+```
+
+## Controls
+
+- `W`, `A`, `S`, `D` (or arrow keys): move
+- `ESC`: quit
+- Window close button: quit
+
+## Map Format (`.ber`)
+
+The map must be a text file with the `.ber` extension and a rectangular shape.
+
+Allowed tiles:
+- `1`: wall
+- `0`: empty space
+- `P`: player start (exactly 1)
+- `E`: exit (exactly 1)
+- `C`: collectible (at least 1)
+
+## Map Validation
+
+The program must reject maps that do not follow the rules, including (non-exhaustive):
+
+- The map is not rectangular.
+- The map is not surrounded by walls (`1`).
+- Missing or invalid number of required elements (`P`, `E`, `C`).
+- The map contains invalid characters.
+- The map is not solvable (player cannot reach all collectibles and the exit).
+
+On error, the program prints `Error` and exits.
+
+## Bonus
+
+(Describe bonus features here if implemented.)

@@ -20,8 +20,6 @@ make
 make clean
 make fclean
 make re
-make bonus
-```
 
 ## Usage
 
@@ -61,8 +59,3 @@ The program must reject maps that do not follow the rules, including (non-exhaus
 - The map contains invalid characters.
 - The map is not solvable (player cannot reach all collectibles and the exit).
 
-On error, the program prints `Error` and exits.
-
-## Bonus
-
-(Describe bonus features here if implemented.)

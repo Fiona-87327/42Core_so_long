@@ -5,7 +5,7 @@ Small 2D game project for 42 (Core Curriculum). The player must collect all coll
 ## Requirements
 
 - Language: C
-- Graphics: MiniLibX
+- Graphics: MLX42
 - Build: `make`
 - (Optional) Uses `libft` (if your project does)
 

@@ -1,4 +1,4 @@
-# so_long
+#  🎮 so_long
 
 Small 2D game project for 42 (Core Curriculum). The player must collect all collectibles and then reach the exit.
 
